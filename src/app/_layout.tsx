@@ -1,18 +1,30 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useColorScheme } from 'react-native';
+import '../global.css';
+import { Stack } from 'expo-router';
+import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider';
 
-import { AnimatedSplashOverlay } from '@/components/animated-icon';
-import AppTabs from '@/components/app-tabs';
-
-SplashScreen.preventAutoHideAsync();
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+export default function RootLayout() {
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <AnimatedSplashOverlay />
-      <AppTabs />
-    </ThemeProvider>
+    <GluestackUIProvider mode="light">
+      <Stack
+        screenOptions={{
+          headerStyle: { backgroundColor: '#1E293B' },
+          headerTintColor: '#FFFFFF',
+          headerTitleStyle: { fontWeight: 'bold' },
+        }}
+      >
+        <Stack.Screen
+          name="index"
+          options={{
+            title: 'Repositórios',
+          }}
+        />
+        <Stack.Screen
+          name="add"
+          options={{
+            title: 'Adicionar Repositório',
+          }}
+        />
+      </Stack>
+    </GluestackUIProvider>
   );
 }
